@@ -247,7 +247,7 @@ def build_index(raw_dir: Path | None = None, db_path: Path | None = None) -> dic
 
     raw_dir = raw_dir or (config.ROOT / "corpus" / "raw")
     chunks = ingest_all(raw_dir)
-    vectors = embed_passages([c.contextual_text() for c in chunks])
+    vectors = embed_passages([c.contextual_text() for c in chunks], progress=True)
     store = Store(db_path)
     store.rebuild(chunks, vectors)
     return store.stats()

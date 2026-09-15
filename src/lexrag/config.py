@@ -12,6 +12,17 @@ load_dotenv(ROOT / ".env")
 # --- Retrieval ---
 EMBED_MODEL = os.getenv("LEXRAG_EMBED_MODEL", "jinaai/jina-embeddings-v2-base-de")
 EMBED_DIM = int(os.getenv("LEXRAG_EMBED_DIM", "768"))
+# Speichergrenzen der Indexierung. fastembed nimmt sonst batch_size=256 und
+# startet bei parallel=None Worker-Prozesse, von denen JEDER das Modell laedt.
+# Auf einem 8-GB-Rechner fuehrt das mit einem 768-Dim-Modell zuverlaessig ins
+# Swapping bis zum Stillstand.
+EMBED_BATCH = int(os.getenv("LEXRAG_EMBED_BATCH", "16"))
+EMBED_PARALLEL = int(os.getenv("LEXRAG_EMBED_PARALLEL", "1"))
+ONNX_THREADS = int(os.getenv("LEXRAG_ONNX_THREADS", "2"))
+# fastembed legt Modelle sonst unter tempfile.gettempdir() ab -- macOS raeumt
+# das beim Neustart weg, und jeder Reboot erzwingt einen Neu-Download von
+# mehreren hundert MB. Deshalb ein ausdruecklicher, dauerhafter Ort.
+MODEL_CACHE = Path(os.getenv("LEXRAG_MODEL_CACHE", Path.home() / ".cache" / "lexrag-models"))
 DB_PATH = Path(os.getenv("LEXRAG_DB", ROOT / "corpus" / "lexrag.db"))
 RRF_K = int(os.getenv("LEXRAG_RRF_K", "60"))
 TOP_K = int(os.getenv("LEXRAG_TOP_K", "6"))
