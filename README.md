@@ -5,9 +5,12 @@ Ein agentisches RAG-System über den **EU AI Act** (VO (EU) 2024/1689) und die
 aus dem Normtext, belegt jede Aussage artikel- und absatzgenau — und schweigt
 nachweislich, wenn der Korpus die Frage nicht trägt.
 
-Gebaut als Referenzimplementierung für die vier Fähigkeiten, die 2026 in
-KI-Ausschreibungen am häufigsten verlangt werden: **Evaluation**, **Agenten**,
-**RAG** und **MCP**.
+Der Entwurfsgrundsatz: Im Zweifel nichts sagen, statt etwas Plausibles. Wer mit
+diesen Rechtsakten arbeitet, braucht prüfbare Fundstellen — eine flüssige
+Zusammenfassung ohne Beleg ist wertlos oder gefährlich. Belege sind deshalb
+keine Prosa, sondern Verweise, die gegen das tatsächlich Abgerufene geprüft
+werden; und eine Verweigerung gilt als korrektes Ergebnis, das eigens gemessen
+wird.
 
 > **Hinweis:** Kein Rechtsrat. Das System gibt den amtlichen Normtext wieder
 > und ersetzt keine juristische Prüfung.
