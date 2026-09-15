@@ -74,7 +74,9 @@ def main() -> None:
         if not nur_messen or not cfg["db"].exists():
             bauzeit = build(cfg)
         s = measure(cfg)
-        zeilen.append({**cfg, "db": str(cfg["db"]), "bauzeit_s": bauzeit, **s})
+        # Nur der Dateiname -- ein absoluter Pfad traegt Benutzernamen und
+        # Verzeichnisstruktur in ein oeffentliches Repository.
+        zeilen.append({**cfg, "db": cfg["db"].name, "bauzeit_s": bauzeit, **s})
 
     kopf = ["Modell", "Dim", "Recall@6", "MRR", "vollst.", "Latenz", "Indexbau"]
     print("\n| " + " | ".join(kopf) + " |")

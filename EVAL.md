@@ -124,6 +124,46 @@ belegt?) plus **Zusatzzitate** als getrennte, nicht bestrafte Kennzahl.
 Das ist eine Änderung nach Sichtung des Ergebnisses und wird deshalb hier
 ausdrücklich genannt.
 
+## Wahl des Embedding-Modells — gemessen, nicht angenommen
+
+Naheliegende Annahme: ein größeres, eigens für Deutsch trainiertes Modell
+liefert auf einem deutschen Rechtskorpus bessere Treffer. Gemessen trifft das
+nicht zu.
+
+Reproduzieren mit `python evals/compare_embeddings.py` (kostet nichts —
+deterministische Ebene, keine Modellaufrufe):
+
+| Modell | Dim | Recall@6 | MRR | vollständig | Latenz | Indexbau |
+|---|---|---|---|---|---|---|
+| `paraphrase-multilingual-MiniLM-L12-v2` | 384 | **0,972** | 0,835 | **0,944** | **40 ms** | **140 s** |
+| `jina-embeddings-v2-base-de` | 768 | 0,889 | **0,843** | 0,833 | 76 ms | 772 s |
+
+Das kleinere, generische Modell findet häufiger das Richtige, bei 5,5-fach
+kürzerem Indexbau und halber Abfragelatenz. Jina liegt allein beim MRR knapp
+vorn: Wenn es trifft, platziert es minimal besser — es trifft nur seltener.
+
+**Woran es liegt.** Der Unterschied besteht aus genau zwei Fällen. Der
+deutlichere: auf *„Welche Pflicht zur KI-Kompetenz trifft Anbieter und
+Betreiber?"* liefert Jina im Vektorkanal Art. 23, 24, 25, 26 und 50 — lauter
+Normen über *Pflichten von Anbietern, Betreibern, Händlern und Einführern*.
+Es gewichtet die generische Rollen- und Pflichtensprache und verliert dabei den
+kennzeichnenden Begriff „KI-Kompetenz"; Art. 4 fällt aus den ersten sechs
+heraus. MiniLM führt ihn auf Rang 3.
+
+Da beide Läufe denselben BM25-Kanal und denselben Index benutzen, ist der
+Vektorkanal die einzige Variable — er hat den Fall entschieden.
+
+**Wie belastbar das ist.** Retrieval ist deterministisch: derselbe Index und
+dieselbe Anfrage ergeben stets dasselbe Ergebnis, es gibt also keine Streuung
+zwischen Wiederholungen. Der Unterschied ist damit reproduzierbar und kein
+Messrauschen. Er beruht aber auf **zwei von achtzehn Fällen**. Die belastbare
+Aussage lautet deshalb: *MiniLM ist hier mindestens so gut wie Jina, bei einem
+Bruchteil der Kosten* — nicht: *MiniLM ist neun Punkte besser*. Für eine
+Aussage in dieser Schärfe wäre ein deutlich größerer Golden Set nötig.
+
+**Entscheidung:** MiniLM bleibt Vorgabe. Das Modell ist über
+`LEXRAG_EMBED_MODEL` austauschbar, der Vergleich jederzeit wiederholbar.
+
 ## Bekannte Grenzen
 
 **Der Agent zitiert repräsentativ, nicht erschöpfend.** Bei

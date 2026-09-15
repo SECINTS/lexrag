@@ -6,6 +6,7 @@ corpus/raw/*.html
 corpus/*.db
 corpus/chunks.jsonl
 traces/
-evals/results/
+evals/results/*
+!evals/results/embedding-vergleich.json
 .DS_Store
 evals/.cache/

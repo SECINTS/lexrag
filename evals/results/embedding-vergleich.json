@@ -1,0 +1,26 @@
+[
+  {
+    "name": "MiniLM-multilingual",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "dim": 384,
+    "db": "lexrag-minilm.db",
+    "bauzeit_s": 140.1,
+    "faelle": 18,
+    "recall_at_k": 0.972,
+    "mrr": 0.835,
+    "vollstaendig_getroffen": 0.944,
+    "latenz_ms_mittel": 40.056
+  },
+  {
+    "name": "Jina-v2-base-de",
+    "model": "jinaai/jina-embeddings-v2-base-de",
+    "dim": 768,
+    "db": "lexrag-jina.db",
+    "bauzeit_s": 772.1,
+    "faelle": 18,
+    "recall_at_k": 0.889,
+    "mrr": 0.843,
+    "vollstaendig_getroffen": 0.833,
+    "latenz_ms_mittel": 76.389
+  }
+]
