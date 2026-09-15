@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+corpus/raw/*.html
+corpus/*.db
+corpus/chunks.jsonl
+traces/*.jsonl
+evals/results/
+.DS_Store
+evals/.cache/

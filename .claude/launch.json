@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "lexrag-api",
+      "runtimeExecutable": "./.venv/bin/uvicorn",
+      "runtimeArgs": ["lexrag.api:app", "--app-dir", "src", "--port", "8730"],
+      "port": 8730
+    }
+  ]
+}

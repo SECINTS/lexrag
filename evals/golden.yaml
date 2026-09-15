@@ -1,0 +1,130 @@
+# Golden Set fuer LexRAG.
+#
+# expect_articles: Praefixe von chunk_ids, die eine korrekte Antwort belegen muessen.
+#   Treffer zaehlt, wenn eine abgerufene chunk_id mit dem Praefix beginnt.
+# answerable: false  -> der Korpus traegt die Antwort NICHT. Erwartet wird grounded=false.
+#   Diese Faelle messen, ob das System schweigt statt zu raten.
+
+cases:
+  # ---------------- EU AI Act ----------------
+  - id: aia_verbotene_praktiken
+    question: Welche KI-Praktiken sind nach dem AI Act ausdrücklich verboten?
+    expect_articles: [ai_act:art_5]
+    answerable: true
+
+  - id: aia_hochrisiko_einstufung
+    question: Nach welchen Regeln gilt ein KI-System als Hochrisiko-KI-System?
+    expect_articles: [ai_act:art_6, ai_act:anx_III]
+    answerable: true
+
+  - id: aia_anhang3_bereiche
+    question: In welchen Bereichen listet Anhang III Hochrisiko-KI-Systeme auf?
+    expect_articles: [ai_act:anx_III]
+    answerable: true
+
+  - id: aia_ki_kompetenz
+    question: Welche Pflicht zur KI-Kompetenz trifft Anbieter und Betreiber?
+    expect_articles: [ai_act:art_4]
+    answerable: true
+
+  - id: aia_transparenz_kennzeichnung
+    question: Wann müssen KI-erzeugte Inhalte gekennzeichnet werden?
+    expect_articles: [ai_act:art_50]
+    answerable: true
+
+  - id: aia_risikomanagement
+    question: Was muss ein Risikomanagementsystem für Hochrisiko-KI-Systeme leisten?
+    expect_articles: [ai_act:art_9]
+    answerable: true
+
+  - id: aia_technische_doku
+    question: Welche technische Dokumentation ist für Hochrisiko-KI-Systeme zu erstellen?
+    expect_articles: [ai_act:art_11, ai_act:anx_IV]
+    answerable: true
+
+  - id: aia_menschliche_aufsicht
+    question: Welche Anforderungen stellt der AI Act an die menschliche Aufsicht?
+    expect_articles: [ai_act:art_14]
+    answerable: true
+
+  - id: aia_gpai_pflichten
+    question: Welche Pflichten haben Anbieter von KI-Modellen mit allgemeinem Verwendungszweck?
+    expect_articles: [ai_act:art_53]
+    answerable: true
+
+  - id: aia_sanktionen
+    question: Wie hoch können Geldbußen nach dem AI Act ausfallen?
+    expect_articles: [ai_act:art_99]
+    answerable: true
+
+  - id: aia_betreiberpflichten
+    question: Welche Pflichten treffen Betreiber von Hochrisiko-KI-Systemen?
+    expect_articles: [ai_act:art_26]
+    answerable: true
+
+  - id: aia_reallabore
+    question: Was ist ein KI-Reallabor und wer muss eines einrichten?
+    expect_articles: [ai_act:art_57]
+    answerable: true
+
+  # ---------------- NIS-2 ----------------
+  - id: nis_risikomanagement
+    question: Welche Risikomanagementmaßnahmen verlangt NIS2 von wesentlichen Einrichtungen?
+    expect_articles: [nis2:art_21]
+    answerable: true
+
+  - id: nis_meldefristen
+    question: Welche Fristen gelten für die Meldung erheblicher Sicherheitsvorfälle nach NIS2?
+    expect_articles: [nis2:art_23]
+    answerable: true
+
+  - id: nis_governance
+    question: Welche Verantwortung tragen Leitungsorgane nach NIS2?
+    expect_articles: [nis2:art_20]
+    answerable: true
+
+  - id: nis_einrichtungsarten
+    question: Wie unterscheidet NIS2 zwischen wesentlichen und wichtigen Einrichtungen?
+    expect_articles: [nis2:art_3]
+    answerable: true
+
+  - id: nis_sektoren
+    question: Welche Sektoren gelten nach NIS2 als Sektoren mit hoher Kritikalität?
+    expect_articles: [nis2:anx_I]
+    answerable: true
+
+  - id: nis_bussgelder
+    question: Welche Obergrenzen gelten für Geldbußen nach NIS2?
+    expect_articles: [nis2:art_34]
+    answerable: true
+
+  # ---------------- Negativfaelle: Korpus traegt die Antwort nicht ----------------
+  - id: neg_dsgvo
+    question: Wie hoch sind die Bußgelder nach der DSGVO?
+    expect_articles: []
+    answerable: false
+
+  - id: neg_iso27001
+    question: Welche Controls verlangt ISO/IEC 27001 in Anhang A?
+    expect_articles: []
+    answerable: false
+
+  - id: neg_cra
+    question: Was regelt der Cyber Resilience Act für Produkte mit digitalen Elementen?
+    expect_articles: []
+    answerable: false
+
+  - id: neg_dora
+    question: Welche Anforderungen stellt DORA an das IKT-Risikomanagement von Finanzunternehmen?
+    expect_articles: []
+    answerable: false
+
+  - id: neg_nisg_at
+    question: Welche Meldepflichten sieht das österreichische NISG in seiner nationalen Umsetzung vor?
+    expect_articles: []
+    answerable: false
+
+  - id: neg_offtopic
+    question: Wie funktioniert Backpropagation in neuronalen Netzen?
+    expect_articles: []
+    answerable: false
